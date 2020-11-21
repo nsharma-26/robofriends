@@ -1,9 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CardList from './CardList'
-import {robots} from './robots';
+//import {robots} from './robots';
 import Scroll from './Scroll'
+import axios from 'axios';
+
 function App(){ 
     const [searchRobot, setSearchRobot] = useState('');
+    const [robots, setRobots] = useState([]);
+ 
+  useEffect(async () => {
+    const result = await axios(
+      'https://jsonplaceholder.typicode.com/users',
+    );
+ 
+    setRobots(result.data);
+  }, []);
     //const [robots, setRobots] = useState([]);
     const handleSearch = (e) =>{
         setSearchRobot(e.target.value);
